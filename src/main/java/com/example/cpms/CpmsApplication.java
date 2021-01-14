@@ -11,5 +11,6 @@ public class CpmsApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CpmsApplication.class, args);
+        System.out.println("check for connect to git and github");
     }
 }
