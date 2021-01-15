@@ -1,8 +1,8 @@
 package com.example.cpms.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class product {
@@ -11,6 +11,14 @@ public class product {
     @GeneratedValue
     int id;
     String name;
+
+    //ManyToMany relation ship and fix the name of join table and column
+    @ManyToMany
+    @JoinTable(name = "product_category",
+    joinColumns = @JoinColumn(name = "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id"))
+    //Owing side of relation ship
+    private List<category> categories=new ArrayList<>();
 
     public product() {
     }
@@ -35,4 +43,11 @@ public class product {
         this.name = name;
     }
 
+    public List<category> getCategories() {
+        return categories;
+    }
+
+    public void addCategory(category category) {
+        this.categories.add(category);
+    }
 }

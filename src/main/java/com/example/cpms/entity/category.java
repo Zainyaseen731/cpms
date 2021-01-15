@@ -3,6 +3,9 @@ package com.example.cpms.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class category {
@@ -12,6 +15,9 @@ public class category {
     int id;
     String name;
     String parent;
+
+    @ManyToMany(mappedBy = "categories")
+    private List<product> products=new ArrayList<>();
 
     public category() {
     }
@@ -47,5 +53,13 @@ public class category {
 
     public void setParent(String parent) {
         this.parent = parent;
+    }
+
+    public List<product> getProducts() {
+        return products;
+    }
+
+    public void addProduct(product product) {
+        this.products.add(product);
     }
 }
